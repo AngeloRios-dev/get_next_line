@@ -1,7 +1,7 @@
 # get_next_line
 The goal of this project is simple: program a function that returns a line read from a file descriptor.
 
-## read_until_newline
+## read_until_new_line
 
 Descripción:
 read_until_newline es una función auxiliar encargada de leer datos desde un file descriptor (fd) en bloques de tamaño BUFFER_SIZE hasta encontrar un salto de línea (\n) o alcanzar el final del archivo. Su objetivo es acumular datos de manera progresiva sin leer más de lo necesario, almacenándolos en un stash intermedio reutilizable entre llamadas a get_next_line.
