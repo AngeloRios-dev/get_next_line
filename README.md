@@ -3,26 +3,27 @@ The goal of this project is simple: program a function that returns a line read 
 
 ## read_until_new_line
 
-Descripción:
-read_until_newline es una función auxiliar encargada de leer datos desde un file descriptor (fd) en bloques de tamaño BUFFER_SIZE hasta encontrar un salto de línea (\n) o alcanzar el final del archivo. Su objetivo es acumular datos de manera progresiva sin leer más de lo necesario, almacenándolos en un stash intermedio reutilizable entre llamadas a get_next_line.
+Description:  
+`read_until_new_line` is a helper function responsible for reading data from a file descriptor (`fd`) in blocks of size `BUFFER_SIZE` until a newline character (`\n`) is found or the end of the file is reached. Its purpose is to progressively accumulate data without reading more than necessary, storing it in an intermediate stash that can be reused across multiple calls to `get_next_line`.
 
-Características clave:
+Key Features:
 
-   - Utiliza read() en un bucle controlado por la presencia de \n en el stash.
+   - Uses `read()` in a loop controlled by the presence of `\n` in the stash.
 
-   - Si ocurre un error de lectura o de memoria, devuelve NULL.
+   - Returns `NULL` if a read or memory allocation error occurs.
 
-   - Devuelve un nuevo stash actualizado con el contenido previamente leído más lo nuevo.
+   - Returns a new updated stash with both previously read content and the newly read data.
+
 
 ## append_buffer
 
-Descripción:
-ft_append_buffer concatena el contenido actual del stash con los nuevos datos leídos desde el buffer, asegurando la correcta reserva de memoria y la liberación de la memoria anterior. Es una función de apoyo que encapsula la lógica de concatenación dinámica segura.
+Description:  
+`ft_append_buffer` concatenates the current contents of the stash with the new data read from the buffer, ensuring proper memory allocation and freeing the previous memory. It is a helper function that encapsulates safe dynamic concatenation logic.
 
-Características clave:
+Key Features:
 
-   - Termina correctamente el buffer con \0 antes de concatenar.
+   - Properly null-terminates the buffer (`\0`) before concatenation.
 
-   - Libera el stash anterior para evitar fugas de memoria.
+   - Frees the previous stash to prevent memory leaks.
 
-   - Devuelve el nuevo stash resultante de la unión, o NULL en caso de fallo.
+   - Returns the new stash resulting from the merge, or `NULL` in case of failure.
