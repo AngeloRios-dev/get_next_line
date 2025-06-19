@@ -6,7 +6,7 @@
 /*   By: angrios <angrios@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:35:47 by angrios           #+#    #+#             */
-/*   Updated: 2025/06/18 22:20:25 by angrios          ###   ########.fr       */
+/*   Updated: 2025/06/19 20:39:46 by angrios          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,12 @@ static char	*append_buffer(char *stash, char *buffer, size_t bytes_read)
 	return (stash);
 }
 
-char	*read_until_new_line(int fd, char *stash)
+static char	*trim_stash(char *stash)
+{
+	
+}
+
+static char	*read_until_new_line(int fd, char *stash)
 {
 	char	*buffer;
 	size_t	bytes_read;
@@ -56,6 +61,20 @@ char	*read_until_new_line(int fd, char *stash)
 	}
 	free(buffer);
 	return (stash);
+}
+
+static char	*extract_line(char *stash)
+{
+	size_t	len;
+
+	len = 0;
+	if(!stash)
+		return(NULL);
+	while(stash[len] && stash[len] !='\n')
+		len++;
+	if (stash[len] == '\n')
+		len++;
+	return (ft_substr(stash, 0, len));
 }
 
 char	*get_next_line(int fd)
