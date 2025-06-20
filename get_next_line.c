@@ -6,7 +6,7 @@
 /*   By: angrios <angrios@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:35:47 by angrios           #+#    #+#             */
-/*   Updated: 2025/06/19 20:39:46 by angrios          ###   ########.fr       */
+/*   Updated: 2025/06/20 19:37:00 by angrios          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,20 @@ static char	*append_buffer(char *stash, char *buffer, size_t bytes_read)
 
 static char	*trim_stash(char *stash)
 {
-	
+	char	*new_line;
+	char	*new_stash;
+
+	if (!stash)
+		return (NULL);
+	new_line = ft_strchr(stash, '\n');
+	if (!new_line)
+	{
+		free(stash);
+		return (NULL);
+	}
+	new_stash = ft_strdup(new_line + 1);
+	free(stash);
+	return (new_stash);
 }
 
 static char	*read_until_new_line(int fd, char *stash)
@@ -51,7 +64,7 @@ static char	*read_until_new_line(int fd, char *stash)
 			return (NULL);
 		}
 		if (bytes_read == 0)
-			break;
+			break ;
 		stash = append_buffer(stash, buffer, bytes_read);
 		if (!stash)
 		{
@@ -68,9 +81,9 @@ static char	*extract_line(char *stash)
 	size_t	len;
 
 	len = 0;
-	if(!stash)
-		return(NULL);
-	while(stash[len] && stash[len] !='\n')
+	if (!stash)
+		return (NULL);
+	while (stash[len] && stash[len] != '\n')
 		len++;
 	if (stash[len] == '\n')
 		len++;
@@ -86,5 +99,3 @@ char	*get_next_line(int fd)
 		return (NULL);
 	return (NULL);
 }
-
-
