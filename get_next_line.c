@@ -6,7 +6,7 @@
 /*   By: angrios <angrios@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:35:47 by angrios           #+#    #+#             */
-/*   Updated: 2025/06/20 19:49:07 by angrios          ###   ########.fr       */
+/*   Updated: 2025/06/20 19:55:18 by angrios          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static char	*trim_stash(char *stash)
 static char	*read_until_new_line(int fd, char *stash)
 {
 	char	*buffer;
-	size_t	bytes_read;
+	int		bytes_read;
 
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
@@ -105,5 +105,5 @@ char	*get_next_line(int fd)
 	}
 	line = extract_line(stash);
 	stash = trim_stash(stash);
-	return (NULL);
+	return (line);
 }
