@@ -6,12 +6,11 @@
 /*   By: angrios <angrios@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:35:47 by angrios           #+#    #+#             */
-/*   Updated: 2025/06/20 19:37:00 by angrios          ###   ########.fr       */
+/*   Updated: 2025/06/20 19:49:07 by angrios          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#define BUFFER_SIZE 1024
 
 static char	*append_buffer(char *stash, char *buffer, size_t bytes_read)
 {
@@ -97,5 +96,14 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
+	stash = read_until_new_line(fd, stash);
+	if (!stash || *stash == '\0')
+	{
+		free(stash);
+		stash = NULL;
+		return (NULL);
+	}
+	line = extract_line(stash);
+	stash = trim_stash(stash);
 	return (NULL);
 }
