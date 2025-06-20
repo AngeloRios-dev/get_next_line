@@ -27,3 +27,10 @@ Key Features:
    - Frees the previous stash to prevent memory leaks.
 
    - Returns the new stash resulting from the merge, or `NULL` in case of failure.
+
+
+## trim_stash
+
+Description:  
+`trim_stash` is responsible for removing the already read line from the stash (up to and including the `\n`), returning a copy of the remaining content. If there's no more useful content, it frees the stash and returns `NULL`.
+
