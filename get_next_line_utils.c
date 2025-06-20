@@ -6,7 +6,7 @@
 /*   By: angrios <angrios@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 15:54:53 by angrios           #+#    #+#             */
-/*   Updated: 2025/06/20 19:34:07 by angrios          ###   ########.fr       */
+/*   Updated: 2025/06/20 21:25:28 by angrios          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,9 @@ char	*ft_strdup(const char *str)
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	int		i;
-	int		j;
-	size_t	s1_len;
-	size_t	s2_len;
 	char	*new_str;
+	char	*result;
+	size_t	total_len;
 
 	if (!s1 && !s2)
 		return (NULL);
@@ -70,19 +68,17 @@ char	*ft_strjoin(char *s1, char *s2)
 		return (ft_strdup(s2));
 	if (!s2)
 		return (ft_strdup(s1));
-	i = 0;
-	j = 0;
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
-	new_str = malloc(sizeof(char) * (s1_len + s2_len + 1));
+	total_len = ft_strlen(s1) + ft_strlen(s2) + 1;
+	new_str = malloc(sizeof(char) * total_len);
 	if (!new_str)
 		return (NULL);
-	while (i < s1_len)
-		new_str[i] = s1[i++];
-	while (j < s2_len)
-		new_str[i++] = s2[j++];
-	new_str[i] = '\0';
-	return (new_str);
+	result = new_str;
+	while (*s1)
+		*new_str++ = *s1++;
+	while (*s2)
+		*new_str++ = *s2++;
+	*new_str = '\0';
+	return (result);
 }
 
 char	*ft_substr(const char *s, unsigned int start, size_t len)
