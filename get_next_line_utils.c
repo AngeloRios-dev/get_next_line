@@ -6,7 +6,7 @@
 /*   By: angrios <angrios@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 15:54:53 by angrios           #+#    #+#             */
-/*   Updated: 2025/06/20 21:25:28 by angrios          ###   ########.fr       */
+/*   Updated: 2025/06/25 17:52:56 by angrios          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ char	*ft_strchr(const char *s, int c)
 {
 	char	chr;
 
+	if (!s)
+		return (NULL);
 	chr = (char)c;
 	while (*s)
 	{
@@ -55,7 +57,7 @@ char	*ft_strdup(const char *str)
 	dup_str[i] = '\0';
 	return (dup_str);
 }
-
+// FIX FN, FIND A WAY TO USE IT WITHOUT MODIFYING POINTERS
 char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*new_str;

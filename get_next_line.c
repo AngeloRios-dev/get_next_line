@@ -6,7 +6,7 @@
 /*   By: angrios <angrios@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:35:47 by angrios           #+#    #+#             */
-/*   Updated: 2025/06/20 19:55:18 by angrios          ###   ########.fr       */
+/*   Updated: 2025/06/25 17:25:27 by angrios          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,12 @@
 
 static char	*append_buffer(char *stash, char *buffer, size_t bytes_read)
 {
-	char	*old_stash;
+	char	*new_stash;
 
-	old_stash = stash;
 	buffer[bytes_read] = '\0';
-	stash = ft_strjoin(old_stash, buffer);
-	if (!stash)
-	{
-		free(old_stash);
-		return (NULL);
-	}
-	free(old_stash);
-	return (stash);
+	new_stash = ft_strjoin(stash, buffer);
+	free(stash);
+	return (new_stash);
 }
 
 static char	*trim_stash(char *stash)
@@ -42,6 +36,11 @@ static char	*trim_stash(char *stash)
 		return (NULL);
 	}
 	new_stash = ft_strdup(new_line + 1);
+	if (!new_stash)
+	{
+		free(stash);
+		return (NULL);
+	}
 	free(stash);
 	return (new_stash);
 }
@@ -97,7 +96,7 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	stash = read_until_new_line(fd, stash);
-	if (!stash || *stash == '\0')
+	if (!stash || !*stash)
 	{
 		free(stash);
 		stash = NULL;
