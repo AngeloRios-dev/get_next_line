@@ -6,7 +6,7 @@
 /*   By: angrios <angrios@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:35:47 by angrios           #+#    #+#             */
-/*   Updated: 2025/06/25 17:25:27 by angrios          ###   ########.fr       */
+/*   Updated: 2025/06/29 12:52:14 by angrios          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char	*append_buffer(char *stash, char *buffer, size_t bytes_read)
 	char	*new_stash;
 
 	buffer[bytes_read] = '\0';
-	new_stash = ft_strjoin(stash, buffer);
+	new_stash = ft_strjoin(stash, buffer, 0, 0);
 	free(stash);
 	return (new_stash);
 }
@@ -103,6 +103,12 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	line = extract_line(stash);
+	if (!line || line[0] == '\0')
+	{
+		free(stash);
+		stash = NULL;
+		return (NULL);
+	}
 	stash = trim_stash(stash);
 	return (line);
 }
