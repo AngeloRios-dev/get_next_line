@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: angrios <angrios@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/12 15:54:53 by angrios           #+#    #+#             */
-/*   Updated: 2025/06/29 12:40:22 by angrios          ###   ########.fr       */
+/*   Created: 2025/06/29 16:53:38 by angrios           #+#    #+#             */
+/*   Updated: 2025/06/29 16:53:40 by angrios          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,31 +59,7 @@ char	*ft_strdup(const char *str)
 	dup_str[i] = '\0';
 	return (dup_str);
 }
-// FIX FN, FIND A WAY TO USE IT WITHOUT MODIFYING POINTERS
-// char	*ft_strjoin(char *s1, char *s2)
-// {
-// 	char	*new_str;
-// 	char	*result;
-// 	size_t	total_len;
 
-// 	if (!s1 && !s2)
-// 		return (NULL);
-// 	if (!s1)
-// 		return (ft_strdup(s2));
-// 	if (!s2)
-// 		return (ft_strdup(s1));
-// 	total_len = ft_strlen(s1) + ft_strlen(s2) + 1;
-// 	new_str = malloc(sizeof(char) * total_len);
-// 	if (!new_str)
-// 		return (NULL);
-// 	result = new_str;
-// 	while (*s1)
-// 		*new_str++ = *s1++;
-// 	while (*s2)
-// 		*new_str++ = *s2++;
-// 	*new_str = '\0';
-// 	return (result);
-// }
 char	*ft_strjoin(char *s1, char *s2, size_t i, size_t j)
 {
 	size_t	len1;
@@ -112,8 +88,6 @@ char	*ft_strjoin(char *s1, char *s2, size_t i, size_t j)
 	new_str[i + j] = '\0';
 	return (new_str);
 }
-
-
 
 char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
