@@ -6,7 +6,7 @@
 /*   By: angrios <angrios@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:35:47 by angrios           #+#    #+#             */
-/*   Updated: 2025/06/29 16:52:14 by angrios          ###   ########.fr       */
+/*   Updated: 2025/06/30 11:04:21 by angrios          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,18 @@ static void	*free_mem(char **ptr)
 
 static void	trim_stash(char **stash)
 {
-	int		i;
 	char	*new_stash;
+	char	*post_newline;
 
 	if (!stash || !*stash)
 		return ;
-	i = 0;
-	while ((*stash)[i] && (*stash)[i] != '\n')
-		i++;
-	if (!((*stash)[i]))
+	post_newline = ft_strchr(*stash, '\n');
+	if (!post_newline)
 	{
 		free_mem(stash);
 		return ;
 	}
-	new_stash = ft_strdup(*stash + i + 1);
+	new_stash = ft_strdup(post_newline + 1);
 	if (!new_stash)
 		return ;
 	free(*stash);
