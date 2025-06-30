@@ -6,7 +6,7 @@
 /*   By: angrios <angrios@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:35:47 by angrios           #+#    #+#             */
-/*   Updated: 2025/06/30 11:04:21 by angrios          ###   ########.fr       */
+/*   Updated: 2025/06/30 11:24:08 by angrios          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	trim_stash(char **stash)
 
 static int	read_until_new_line(int fd, char **stash, char **buffer)
 {
-	char	*temp;
+	char	*temp_stash;
 	int		bytes_read;
 
 	while (!ft_strchr(*stash, '\n'))
@@ -55,11 +55,11 @@ static int	read_until_new_line(int fd, char **stash, char **buffer)
 		if (bytes_read == 0)
 			break ;
 		(*buffer)[bytes_read] = '\0';
-		temp = ft_strjoin(*stash, *buffer, 0, 0);
-		if (!temp)
+		temp_stash = ft_strjoin(*stash, *buffer, 0, 0);
+		if (!temp_stash)
 			return (0);
 		free(*stash);
-		*stash = temp;
+		*stash = temp_stash;
 	}
 	return (1);
 }
