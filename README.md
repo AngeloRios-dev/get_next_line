@@ -1,36 +1,68 @@
-# get_next_line
+# 📄 get_next_line
 The goal of this project is simple: program a function that returns a line read from a file descriptor.
 
-## read_until_new_line
+> A function that reads a line from a file descriptor, one call at a time, including the newline character (`\n`) if present.
 
-Description:  
-`read_until_new_line` is a helper function responsible for reading data from a file descriptor (`fd`) in blocks of size `BUFFER_SIZE` until a newline character (`\n`) is found or the end of the file is reached. Its purpose is to progressively accumulate data without reading more than necessary, storing it in an intermediate stash that can be reused across multiple calls to `get_next_line`.
+## 🧠 Project Overview
 
-Key Features:
+`get_next_line` is a C function that returns one line at a time from a file descriptor. It handles reading and buffering internally, returning each line (ending with `\n` if present) with each call. It uses dynamic memory management and maintains state between calls using a static variable.
 
-   - Uses `read()` in a loop controlled by the presence of `\n` in the stash.
+This project was developed as part of the **42 School curriculum** and focuses on mastering low-level file I/O and string operations.
 
-   - Returns `NULL` if a read or memory allocation error occurs.
+---
 
-   - Returns a new updated stash with both previously read content and the newly read data.
+## ⚙️ Compilation
 
+Use `gcc` to compile the files. You can set `BUFFER_SIZE` to any positive value:
 
-## append_buffer
+```bash
+gcc -Wall -Wextra -Werror -D BUFFER_SIZE=42 get_next_line.c get_next_line_utils.c -o gnl_test
 
-Description:  
-`ft_append_buffer` concatenates the current contents of the stash with the new data read from the buffer, ensuring proper memory allocation and freeing the previous memory. It is a helper function that encapsulates safe dynamic concatenation logic.
+---
 
-Key Features:
+# ▶️ Usage Example
+```c
+#include <fcntl.h>
+#include <stdio.h>
+#include "get_next_line.h"
 
-   - Properly null-terminates the buffer (`\0`) before concatenation.
+int main(void)
+{
+    int fd = open("example.txt", O_RDONLY);
+    char *line;
 
-   - Frees the previous stash to prevent memory leaks.
+    while ((line = get_next_line(fd)) != NULL)
+    {
+        printf("%s", line);
+        free(line);
+    }
+    close(fd);
+    return 0;
+}
 
-   - Returns the new stash resulting from the merge, or `NULL` in case of failure.
+---
 
+# 📁 File Structure
+get_next_line/
+├── get_next_line.c        # Core logic of get_next_line
+├── get_next_line_utils.c  # Helper functions (string operations)
+├── get_next_line.h        # Function declarations and BUFFER_SIZE macro
 
-## trim_stash
+---
 
-Description:  
-`trim_stash` is responsible for removing the already read line from the stash (up to and including the `\n`), returning a copy of the remaining content. If there's no more useful content, it frees the stash and returns `NULL`.
+# 🔧 Functions Overview
+## Main Function
+- get_next_line(int fd): Reads and returns the next line from fd, including the newline character if present.
 
+## Utility Functions
+- ft_strlen: Returns the length of a string.
+
+- ft_strchr: Searches for a character in a string.
+
+- ft_strdup: Duplicates a string.
+
+- ft_strjoin: Joins two strings into a new one.
+
+- ft_substr: Extracts a substring from a string.
+
+All utility functions are custom implementations due to project restrictions on standard library usage.
