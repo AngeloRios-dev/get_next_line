@@ -43,9 +43,9 @@ int main(void)
 
 # 📁 File Structure
 get_next_line/
-├── get_next_line.c        # Core logic of get_next_line
-├── get_next_line_utils.c  # Helper functions (string operations)
-├── get_next_line.h        # Function declarations and BUFFER_SIZE macro
+- get_next_line.c        # Core logic of get_next_line
+- get_next_line_utils.c  # Helper functions (string operations)
+- get_next_line.h        # Function declarations and BUFFER_SIZE macro
 
 ---
 
