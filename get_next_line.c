@@ -6,7 +6,7 @@
 /*   By: angrios <angrios@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:35:47 by angrios           #+#    #+#             */
-/*   Updated: 2025/06/30 11:24:08 by angrios          ###   ########.fr       */
+/*   Updated: 2025/06/30 14:56:20 by angrios          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	trim_stash(char **stash)
 	if (!stash || !*stash)
 		return ;
 	post_newline = ft_strchr(*stash, '\n');
-	if (!post_newline)
+	if (!post_newline || *(post_newline + 1) == '\0')
 	{
 		free_mem(stash);
 		return ;
@@ -69,7 +69,7 @@ static char	*extract_line(char *stash)
 	int		len;
 	char	*line;
 
-	if (!stash)
+	if (!stash || stash[0] == '\0')
 		return (NULL);
 	len = 0;
 	while (stash[len] && stash[len] != '\n')
@@ -92,19 +92,12 @@ char	*get_next_line(int fd)
 		return (NULL);
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
-		return (free_mem(&buffer));
+		return (NULL);
 	if (!read_until_new_line(fd, &stash, &buffer))
 		return (free_mem(&stash), free_mem(&buffer));
 	line = extract_line(stash);
 	if (!line)
 		return (free_mem(&stash), free_mem(&buffer), NULL);
-	if (line[0] == '\0' && (!stash || stash[0] == '\0'))
-	{
-		free_mem(&line);
-		free_mem(&stash);
-		free_mem(&buffer);
-		return (NULL);
-	}
 	trim_stash(&stash);
 	free(buffer);
 	return (line);
