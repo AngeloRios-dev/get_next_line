@@ -15,7 +15,6 @@ This project was developed as part of the **42 School curriculum** and focuses o
 
 Use `gcc` to compile the files. You can set `BUFFER_SIZE` to any positive value:
 
-```bash
 gcc -Wall -Wextra -Werror -D BUFFER_SIZE=42 get_next_line.c get_next_line_utils.c -o gnl_test
 
 ---
