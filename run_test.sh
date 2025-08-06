@@ -18,3 +18,4 @@ make BUFFER_SIZE=$BUFFER_SIZE > /dev/null
 
 echo "Running test with BUFFER_SIZE=$BUFFER_SIZE and file=$FILE"
 ./gnl "$FILE"
+# valgrind --leak-check=full ./gnl
