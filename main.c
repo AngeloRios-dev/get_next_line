@@ -6,7 +6,7 @@
 /*   By: angrios <angrios@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 13:08:37 by angrios           #+#    #+#             */
-/*   Updated: 2025/08/06 13:55:45 by angrios          ###   ########.fr       */
+/*   Updated: 2025/08/06 14:28:21 by angrios          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,12 @@ int	main(int argc, char **argv)
 		perror("ERROR: could not open file!");
 		return (EXIT_FAILURE);
 	}
-	while ((line = get_next_line(fd)) != NULL)
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
 		printf("%s", line);
 		free(line);
+		line = get_next_line(fd);
 	}
 	close(fd);
 	return (EXIT_SUCCESS);
