@@ -16,6 +16,17 @@ fi
 make fclean > /dev/null
 make BUFFER_SIZE=$BUFFER_SIZE > /dev/null
 
-echo "Running test with BUFFER_SIZE=$BUFFER_SIZE and file=$FILE"
+echo "Running test with BUFFER_SIZE=$BUFFER_SIZE and file=$FILE
+"
 ./gnl "$FILE"
+./gnl "$FILE" > out.txt
+if diff -q out.txt $FILE > /dev/null; then
+	echo "
+	✅ $FILE and BUFFER_SIZE=$BUFFER_SIZE: OK"
+else
+	echo "
+	❌ $FILE and BUFFER_SIZE=$BUFFER_SIZE: KO"
+fi
 # valgrind --leak-check=full ./gnl
+
+rm -f out.txt
